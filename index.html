@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Front-End Internship Assignment</title>
+<style>
+  :root{
+    --ink:#1a1a1a;
+    --muted:#6b6b6b;
+    --line:#e6e2db;
+    --accent:#b5482f;
+    --bg:#faf8f4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+  }
+  header{
+    padding:64px 24px 32px;
+    text-align:center;
+  }
+  header h1{
+    font-size:clamp(28px,4vw,42px);
+    margin:0 0 8px;
+    letter-spacing:-0.02em;
+  }
+  header p{
+    color:var(--muted);
+    margin:0;
+    font-size:16px;
+  }
+  main{
+    max-width:920px;
+    margin:0 auto;
+    padding:24px;
+    display:grid;
+    gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  }
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:28px;
+    text-decoration:none;
+    color:var(--ink);
+    display:block;
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 28px rgba(0,0,0,0.08);
+    border-color:var(--accent);
+  }
+  .card .tag{
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+  }
+  .card h2{
+    margin:10px 0 8px;
+    font-size:20px;
+  }
+  .card p{
+    margin:0;
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.5;
+  }
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    padding:40px 24px 60px;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Front-End Developer Internship Assignment</h1>
+    <p>Three tasks &mdash; HTML, CSS &amp; vanilla JavaScript only</p>
+  </header>
+  <main>
+    <a class="card" href="task1/index.html">
+      <span class="tag">Task 1</span>
+      <h2>Exclusive Privileges Section</h2>
+      <p>Pixel-perfect replica of the ICICI Bank "Exclusive Privileges" carousel section.</p>
+    </a>
+    <a class="card" href="task2/index.html">
+      <span class="tag">Task 2</span>
+      <h2>Video Chapters Carousel</h2>
+      <p>A carousel of YouTube videos with chapter navigation, plus an automated chapter generator.</p>
+    </a>
+    <a class="card" href="task3/index.html">
+      <span class="tag">Task 3</span>
+      <h2>Lead Form on Video</h2>
+      <p>A lead-capture form that appears 6 seconds into video playback.</p>
+    </a>
+  </main>
+  <footer>Built with HTML, CSS &amp; vanilla JavaScript &mdash; no frameworks or external libraries.</footer>
+</body>
+</html>

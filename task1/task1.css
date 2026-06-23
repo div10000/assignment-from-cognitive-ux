@@ -1,0 +1,234 @@
+:root{
+  --maroon:#97281d; /* exact, from h2 computed color */
+  --muted:#6b6b6b;
+  --line:#e6e2db;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:#faf8f4;
+  color:#1a1a1a;
+}
+.back-link{
+  display:inline-block;
+  margin:20px 24px 0;
+  color:var(--muted);
+  text-decoration:none;
+  font-size:14px;
+}
+.back-link:hover{ color:var(--maroon); }
+
+.page{
+  max-width:980px;
+  margin:0 auto;
+  padding:20px 24px 80px;
+}
+.page-title{
+  font-size:clamp(24px,4vw,32px);
+  margin:18px 0 6px;
+  letter-spacing:-0.02em;
+}
+.page-subtitle{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+  margin:0 0 30px;
+  max-width:680px;
+}
+.page-subtitle code{ background:#f1eee8; padding:1px 5px; border-radius:4px; font-size:12.5px; }
+
+/* ===================================================================
+   section.exclusive
+   Background is a PLACEHOLDER — not yet captured from the live page.
+   Swap this gradient for the real section background once you send
+   the console-snippet output (see README block below).
+   =================================================================== */
+.exclusive{
+  position:relative;
+  padding:48px 0;
+  background:linear-gradient(160deg, #e7c9a6, #dab089); /* TODO: confirm via console snippet */
+  overflow:hidden;
+}
+
+/* .container.p-0.p-md-3 — values are EXACT, from getStyles(uid 190) */
+.replica-container{
+  max-width:720px;
+  width:100%;
+  margin:0 auto;
+  padding:16px; /* 1rem, authored as p-md-3 */
+  box-sizing:border-box;
+  display:block;
+}
+
+/* h2 — values are EXACT, from getStyles(uid 188) */
+.replica-heading{
+  margin:0;
+  display:block;
+  font-family:"Mulish", sans-serif;
+  font-size:40px;
+  line-height:60px;
+  font-weight:700;
+  color:var(--maroon);
+  text-align:center;
+}
+
+/* .swiper-container — padding/overflow EXACT (uid 189). perspective value
+   is NOT captured (Swiper sets this internally for .swiper-3d) — 1200px
+   is the common Swiper default, confirm if you can. */
+.replica-swiper{
+  position:relative;
+  display:block;
+  padding:50px;
+  overflow:hidden;
+  perspective:1200px; /* TODO: confirm — Swiper default, not yet verified */
+}
+
+.replica-swiper-wrapper{
+  position:relative;
+  height:332px; /* matches slide height */
+  transform-style:preserve-3d;
+  transform-origin:center;
+  transition:transform .2s ease;
+}
+
+/* Each card frame — positioned by JS via translate3d/rotateY using the
+   formula reverse-engineered from your captured inline transforms:
+     translateX ≈ -93px  × offset
+     translateZ ≈ -265.5px × |offset|
+     rotateY    ≈  33.2°  × offset
+   transition-duration 1000ms is the EXACT captured value. */
+.swiper-slide{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:304.7px; /* exact */
+  transition:transform 1000ms, opacity 1000ms;
+  will-change:transform;
+}
+
+/* .slide.slideN — size/radius/padding/text-align/bg-position EXACT (from
+   the slideStyles + per-slide background dump). Typography inside (h3/p
+   font sizes, colors) is NOT captured — placeholders flagged below. */
+.slide{
+  width:304.7px;
+  height:332px;
+  border-radius:32px;
+  padding:10px 30px;
+  text-align:center;
+  color:rgb(0,0,0);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  box-sizing:border-box;
+}
+
+/* Real CDN URLs — exact, hot-linked directly (your browser fetches these
+   at view time; this isn't scraping, it's just an <img>/bg-image src). */
+.slide1{ background-image:url("https://campaigns.icicibank.com/credit-card/noFee/dist/img/privilages_bg1.webp"); }
+.slide2{ background-image:url("https://campaigns.icicibank.com/credit-card/noFee/dist/img/privilages_bg2.webp"); }
+.slide3{ background-image:url("https://campaigns.icicibank.com/credit-card/noFee/dist/img/privilages_bg3.webp"); }
+.slide4{ background-image:url("https://campaigns.icicibank.com/credit-card/noFee/dist/img/privilages_bg4.webp"); }
+
+/* Typography inside cards — PLACEHOLDER sizes, not yet captured */
+.slide p{ margin:4px 0; font-size:14px; line-height:1.4; }
+.slide h3{ margin:8px 0; font-size:22px; font-weight:700; }
+.logo-placeholder{
+  margin:8px auto 0;
+  font-size:13px;
+  font-weight:700;
+  font-style:italic;
+  color:rgba(0,0,0,0.45);
+  border:1px dashed rgba(0,0,0,0.25);
+  border-radius:6px;
+  padding:2px 8px;
+  display:inline-block;
+}
+
+/* Arrows + pagination — PLACEHOLDER styling, real Swiper button/pagination
+   CSS from the theme not yet captured */
+.swiper-button-prev,
+.swiper-button-next{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:34px;height:34px;
+  border-radius:50%;
+  border:none;
+  background:rgba(255,255,255,0.7);
+  color:var(--maroon);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  z-index:10;
+  transition:background .15s ease;
+}
+.swiper-button-prev{ left:8px; }
+.swiper-button-next{ right:8px; }
+.swiper-button-prev:hover,
+.swiper-button-next:hover{ background:rgba(255,255,255,0.95); }
+.swiper-button-prev svg,
+.swiper-button-next svg{
+  width:16px;height:16px;
+  fill:none; stroke:currentColor; stroke-width:2.6;
+  stroke-linecap:round; stroke-linejoin:round;
+}
+
+.swiper-pagination{
+  position:absolute;
+  left:0; right:0; bottom:14px;
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  z-index:10;
+}
+.swiper-pagination-bullet{
+  width:7px;height:7px;
+  border-radius:50%;
+  background:rgba(151,40,29,0.35);
+  border:none;
+  padding:0;
+  cursor:pointer;
+}
+.swiper-pagination-bullet.active{
+  background:var(--maroon);
+  width:18px;
+  border-radius:4px;
+  transition:width .2s ease;
+}
+
+/* ===================================================================
+   Responsive — scales the whole 3D rig down on narrow viewports rather
+   than re-deriving the coverflow constants per breakpoint. Send me the
+   ~375px DevTools dump (see README) to replace this with the real
+   mobile layout if it actually changes structurally rather than just
+   scaling.
+   =================================================================== */
+@media (max-width:760px){
+  .replica-swiper-wrapper{ transform:scale(var(--fan-scale, 1)); }
+}
+
+.readme{
+  margin-top:40px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:18px 20px;
+}
+.readme h3{ margin:0 0 8px; font-size:15px;}
+.readme p{ color:var(--muted); font-size:13.5px; line-height:1.6; margin:10px 0;}
+.readme ul{ margin:6px 0 14px; padding-left:18px; color:var(--muted); font-size:13.5px; line-height:1.7;}
+.readme code{ background:#f1eee8; padding:1px 5px; border-radius:4px; font-size:12.5px;}
+.console-snippet{
+  background:#1f1c18;
+  color:#f3efe8;
+  padding:14px;
+  border-radius:8px;
+  font-size:12px;
+  line-height:1.5;
+  overflow-x:auto;
+  white-space:pre;
+}
+.readme .hint{ font-size:12px; font-style:italic; }

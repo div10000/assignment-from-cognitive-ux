@@ -1,0 +1,283 @@
+:root{
+  --ink:#1a1a1a;
+  --muted:#6b6b6b;
+  --line:#e6e2db;
+  --accent:#b5482f;
+  --accent-dark:#8c3622;
+  --bg:#faf8f4;
+  --panel:#ffffff;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+}
+.back-link{
+  display:inline-block;
+  margin:20px 24px 0;
+  color:var(--muted);
+  text-decoration:none;
+  font-size:14px;
+}
+.back-link:hover{ color:var(--accent); }
+
+.page{
+  max-width:860px;
+  margin:0 auto;
+  padding:20px 24px 80px;
+}
+.page h1{
+  font-size:clamp(26px,4vw,36px);
+  margin:18px 0 6px;
+  letter-spacing:-0.02em;
+}
+.subtitle{ color:var(--muted); margin:0 0 24px; }
+
+/* ---------- Carousel ---------- */
+.carousel{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.carousel-viewport{
+  flex:1;
+  overflow:hidden;
+  border-radius:14px;
+}
+.carousel-track{
+  display:flex;
+  transition:transform .4s cubic-bezier(.22,1,.36,1);
+}
+.slide{
+  flex:0 0 100%;
+  position:relative;
+  aspect-ratio:16/9;
+  background:#000;
+}
+.slide .thumb-btn{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  padding:0;
+  cursor:pointer;
+  background-size:cover;
+  background-position:center;
+}
+.slide .thumb-btn::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.18);
+  transition:background .15s ease;
+}
+.slide .thumb-btn:hover::after{ background:rgba(0,0,0,0.32); }
+.slide .play-icon{
+  position:absolute;
+  top:50%;left:50%;
+  width:64px;height:64px;
+  margin:-32px 0 0 -32px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.92);
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+}
+.slide .play-icon svg{ width:22px;height:22px; fill:var(--accent); margin-left:2px; }
+.slide .slide-title{
+  position:absolute;
+  left:14px;bottom:12px;
+  color:#fff;
+  font-weight:700;
+  font-size:14px;
+  text-shadow:0 1px 6px rgba(0,0,0,0.6);
+  pointer-events:none;
+}
+.slide.is-playing .thumb-btn,
+.slide.is-playing .play-icon,
+.slide.is-playing .slide-title{ display:none; }
+.slide .player-mount{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+.slide .player-mount iframe{ width:100%; height:100%; border:0; display:block; }
+
+.nav-btn{
+  flex:0 0 auto;
+  width:38px;height:38px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--accent);
+  font-size:20px;
+  line-height:1;
+  cursor:pointer;
+  transition:background .15s ease, transform .1s ease;
+}
+.nav-btn:hover{ background:#f6f1ea; }
+.nav-btn:active{ transform:scale(0.94); }
+
+.dots{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin:14px 0 28px;
+}
+.dot{
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--line);
+  border:none;
+  cursor:pointer;
+  padding:0;
+}
+.dot.active{ background:var(--accent); width:20px; border-radius:5px; transition:width .2s ease;}
+
+/* ---------- Chapters ---------- */
+.chapters-panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:18px 20px;
+  margin-bottom:24px;
+}
+.chapters-panel h2{ margin:0 0 10px; font-size:16px; }
+.chapters-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  gap:6px;
+}
+.chapters-list li button{
+  width:100%;
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  background:none;
+  border:none;
+  text-align:left;
+  padding:8px 10px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:14px;
+  color:var(--ink);
+}
+.chapters-list li button:hover{ background:#f6f1ea; }
+.chapters-list .ts{
+  font-weight:700;
+  color:var(--accent);
+  font-variant-numeric:tabular-nums;
+  flex:0 0 auto;
+}
+
+.notes{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:18px 20px;
+  margin-bottom:30px;
+}
+.notes h3{ margin:0 0 8px; font-size:15px; }
+.notes ul{ margin:0; padding-left:18px; color:var(--muted); font-size:13.5px; line-height:1.6;}
+.notes code{ background:#f1eee8; padding:1px 5px; border-radius:4px; font-size:12.5px;}
+
+/* ---------- Generator ---------- */
+.generator{
+  border-top:1px dashed var(--line);
+  padding-top:28px;
+}
+.generator h2{ font-size:20px; margin:0 0 8px; }
+.gen-intro{ color:var(--muted); font-size:14px; line-height:1.6; margin:0 0 16px; }
+.gen-row{ display:flex; gap:8px; margin-bottom:6px; }
+.gen-row input{
+  flex:1;
+  font:inherit;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  border-radius:8px;
+}
+.gen-row button{
+  flex:0 0 auto;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:10px 14px;
+  font-size:13.5px;
+  font-weight:600;
+  cursor:pointer;
+}
+.gen-row button:hover{ background:#f6f1ea; }
+.gen-status{ min-height:18px; font-size:12.5px; color:var(--muted); margin:0 0 12px; }
+
+.gen-label{ display:block; font-size:13px; font-weight:600; margin-bottom:6px; }
+.gen-label code{ font-weight:400; background:#f1eee8; padding:1px 5px; border-radius:4px; font-size:12px;}
+#genTranscript{
+  width:100%;
+  font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  resize:vertical;
+  margin-bottom:12px;
+}
+
+.gen-run{
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:11px 18px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  margin-bottom:18px;
+}
+.gen-run:hover{ background:var(--accent-dark); }
+
+.gen-result h3{ font-size:14px; margin:18px 0 8px; }
+.gen-chapter-list{
+  list-style:none;
+  margin:0 0 8px;
+  padding:0;
+  display:grid;
+  gap:4px;
+}
+.gen-chapter-list li{
+  display:flex;
+  gap:10px;
+  font-size:13.5px;
+  padding:6px 8px;
+  border-radius:6px;
+  background:#f6f1ea;
+}
+.gen-chapter-list .ts{ font-weight:700; color:var(--accent); font-variant-numeric:tabular-nums; }
+
+.gen-export-hint{ font-size:12.5px; color:var(--muted); margin:0 0 8px;}
+.gen-code{
+  background:#1f1c18;
+  color:#f3efe8;
+  padding:14px;
+  border-radius:8px;
+  font-size:12.5px;
+  overflow-x:auto;
+  margin:0 0 10px;
+}
+.gen-copy{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:8px 14px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+}
+.gen-copy:hover{ background:#f6f1ea; }
+
+@media (max-width:480px){
+  .nav-btn{ width:32px; height:32px; font-size:17px; }
+}

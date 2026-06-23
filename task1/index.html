@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Task 1 — Exclusive Privileges</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="task1.css" />
+</head>
+<body>
+  <a class="back-link" href="../index.html">&larr; All tasks</a>
+
+  <main class="page">
+    <h1 class="page-title">Exclusive Privileges — Replica</h1>
+    <p class="page-subtitle">
+      Rebuilt from real computed styles + DOM structure pulled via Chrome DevTools
+      (no Swiper.js used — the 3D coverflow is hand-rolled in <code>task1.js</code>
+      from the actual captured transform values). See the README note at the bottom
+      for the handful of values still needed to close the last gap to exact.
+    </p>
+
+    <!-- ===================== REPLICA SECTION STARTS =====================
+         Mirrors the live DOM: section.exclusive > .container.p-0.p-md-3 > h2 + swiper
+    -->
+    <section class="exclusive" id="exclusiveSection">
+      <div class="replica-container">
+        <h2 class="replica-heading">Exclusive Privileges</h2>
+
+        <div class="replica-swiper" id="swiperViewport">
+          <div class="replica-swiper-wrapper" id="swiperWrapper">
+            <!-- DOM order matches the captured live order exactly -->
+            <div class="swiper-slide" data-index="0">
+              <div class="slide slide4">
+                <p>Avail</p>
+                <h3>APPLE OFFER</h3>
+                <p>with up to<br />&#8377;7,000/- off</p>
+              </div>
+            </div>
+
+            <div class="swiper-slide" data-index="1">
+              <div class="slide slide1">
+                <p>Get</p>
+                <h3>Activation voucher</h3>
+                <p>with <br />Flat &#8377;1,200/- off.</p>
+                <div class="logo-placeholder" data-note="real <img> src unknown — see README">ixigo</div>
+              </div>
+            </div>
+
+            <div class="swiper-slide" data-index="2">
+              <div class="slide slide2">
+                <p>Get</p>
+                <h3>Activation voucher</h3>
+                <p>with up to<br />&#8377;1,500/- off*.</p>
+                <div class="logo-placeholder" data-note="real <img> src unknown — see README">logo</div>
+              </div>
+            </div>
+
+            <div class="swiper-slide" data-index="3">
+              <div class="slide slide3">
+                <h3>Enjoy Benefits</h3>
+                <p>worth up to <br />&#8377;500/- off* <br />on your tickets</p>
+                <div class="logo-placeholder" data-note="real <img> src unknown — see README">bookmyshow</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="swiper-button-prev" id="swiperPrev" aria-label="Previous offer">
+            <svg viewBox="0 0 24 24"><path d="M15 4l-8 8 8 8" /></svg>
+          </button>
+          <button class="swiper-button-next" id="swiperNext" aria-label="Next offer">
+            <svg viewBox="0 0 24 24"><path d="M9 4l8 8-8 8" /></svg>
+          </button>
+
+          <div class="swiper-pagination" id="swiperPagination"></div>
+        </div>
+      </div>
+    </section>
+    <!-- ===================== REPLICA SECTION ENDS ===================== -->
+
+    <section class="readme">
+      <h3>Where this stands now vs. what's still needed</h3>
+      <p><strong>Already exact</strong> (pulled straight from your DevTools dump):</p>
+      <ul>
+        <li>Container: 720px max-width, 1rem padding, centered, box-sizing border-box.</li>
+        <li>Heading: Mulish 700, 40px/60px, color <code>#97281d</code>, centered.</li>
+        <li>Swiper viewport: 50px padding, overflow hidden.</li>
+        <li>Each card: 304.7&times;332px, 32px border-radius, 10px/30px padding, real background-image URLs (hot-linked directly from ICICI's CDN — that's fine, your browser fetches them at view-time, no scraping involved).</li>
+        <li>The coverflow math itself: translateX &asymp; &minus;93px &times; offset, translateZ &asymp; &minus;265.5px &times; |offset|, rotateY &asymp; 33.2&deg; &times; offset, reverse-engineered directly from the inline transform values your dump captured on three real slides.</li>
+      </ul>
+      <p><strong>Still missing / placeholder</strong> — paste this into the live page's console (F12 → Console) and send me the JSON back:</p>
+      <pre class="console-snippet">copy((() => {
+  const sec = document.querySelector('section.exclusive');
+  const secCS = getComputedStyle(sec);
+  const prev = document.querySelector('.swiper-button-prev');
+  const next = document.querySelector('.swiper-button-next');
+  const pag = document.querySelector('.swiper-pagination');
+  const bullet = document.querySelector('.swiper-pagination-bullet');
+  const slides = [...document.querySelectorAll('.swiper-wrapper > .swiper-slide .slide')];
+
+  return JSON.stringify({
+    sectionBackground: secCS.backgroundImage,
+    sectionBackgroundColor: secCS.backgroundColor,
+    sectionPadding: secCS.padding,
+    arrowPrevCSS: prev ? getComputedStyle(prev).cssText.slice(0, 0) || {
+      width: getComputedStyle(prev).width, height: getComputedStyle(prev).height,
+      background: getComputedStyle(prev).backgroundColor, color: getComputedStyle(prev).color,
+      position: getComputedStyle(prev).position, left: getComputedStyle(prev).left
+    } : null,
+    arrowNextLeft: next ? getComputedStyle(next).right : null,
+    paginationCSS: pag ? { bottom: getComputedStyle(pag).bottom } : null,
+    bulletCSS: bullet ? {
+      width: getComputedStyle(bullet).width, height: getComputedStyle(bullet).height,
+      background: getComputedStyle(bullet).backgroundColor, opacity: getComputedStyle(bullet).opacity
+    } : null,
+    slideFullHTML: slides.map(s => s.outerHTML)
+  }, null, 2);
+})())</pre>
+      <p class="hint">That last line copies the JSON straight to your clipboard — just paste it back to me in chat.</p>
+      <p><strong>Also worth grabbing:</strong> resize the browser to ~375px wide, re-run the original container/heading/swiper <code>getStyles()</code> calls from the Gemini export, and send me those — that covers the "Responsiveness" requirement in the brief, which needs real mobile values, not a guess.</p>
+    </section>
+  </main>
+
+  <script src="task1.js"></script>
+</body>
+</html>

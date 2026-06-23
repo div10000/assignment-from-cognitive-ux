@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Task 2 — Video Chapters Carousel</title>
+<link rel="stylesheet" href="task2.css" />
+</head>
+<body>
+  <a class="back-link" href="../index.html">&larr; All tasks</a>
+
+  <main class="page">
+    <h1>Video Chapters Carousel</h1>
+    <p class="subtitle">Browse the carousel, play a video, and jump straight to a chapter.</p>
+
+    <section class="carousel" aria-roledescription="carousel">
+      <button class="nav-btn prev" id="prevBtn" aria-label="Previous video">&#8249;</button>
+
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="carouselTrack"><!-- slides injected by JS --></div>
+      </div>
+
+      <button class="nav-btn next" id="nextBtn" aria-label="Next video">&#8250;</button>
+    </section>
+
+    <div class="dots" id="dots"></div>
+
+    <section class="chapters-panel" id="chaptersPanel">
+      <h2 id="chaptersTitle">Chapters</h2>
+      <ol class="chapters-list" id="chaptersList"></ol>
+    </section>
+
+    <section class="notes">
+      <h3>How this works</h3>
+      <ul>
+        <li>Each slide is a thumbnail until clicked ("lite embed") — this avoids loading 3 YouTube iframes (and their scripts) up front, which is the biggest real-world performance cost of video carousels.</li>
+        <li>Only one <code>YT.Player</code> instance exists at a time. Switching slides destroys the old player and mounts a new one, so memory/network stay bounded regardless of carousel size.</li>
+        <li>Chapter timestamps are placeholders — <strong>see the README note below</strong> on why, and how to swap in real ones in under a minute.</li>
+      </ul>
+    </section>
+
+    <section class="generator">
+      <h2>Automated Chapter Generator (prototype)</h2>
+      <p class="gen-intro">
+        Paste a YouTube URL. The tool tries to fetch the video's captions directly in the browser.
+        That call is blocked by YouTube's CORS policy on most production domains (it's the same
+        reason a plain client cannot read most YouTube data without a backend) — so as a fallback,
+        you can paste a timestamped transcript instead and it will be segmented the same way.
+      </p>
+
+      <div class="gen-row">
+        <input type="text" id="genUrl" placeholder="https://www.youtube.com/watch?v=..." />
+        <button id="genFetchBtn" type="button">Try auto-fetch captions</button>
+      </div>
+      <p class="gen-status" id="genStatus"></p>
+
+      <label class="gen-label" for="genTranscript">
+        Or paste a transcript (one line per caption, format: <code>00:00:00 text of the line</code>)
+      </label>
+      <textarea id="genTranscript" rows="6" placeholder="00:00:00 Hey everyone, welcome back to the channel
+00:00:08 Today we're going to look at three ways to do this
+00:00:41 First up, the manual approach
+..."></textarea>
+
+      <button id="genRunBtn" type="button" class="gen-run">Generate chapters</button>
+
+      <div id="genResult" class="gen-result" hidden>
+        <h3>Detected chapters</h3>
+        <ol id="genChapterList" class="gen-chapter-list"></ol>
+
+        <h3>Exportable code</h3>
+        <p class="gen-export-hint">Paste this straight into the <code>CHAPTERS</code> map in <code>task2.js</code>, or into a YouTube video description to enable native chapters.</p>
+        <pre id="genCode" class="gen-code"></pre>
+        <button id="genCopyBtn" type="button" class="gen-copy">Copy code</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="task2.js"></script>
+</body>
+</html>
