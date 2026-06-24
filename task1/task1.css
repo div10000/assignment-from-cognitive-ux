@@ -203,3 +203,13 @@ body{
 @media (max-width:760px){
   .replica-swiper-wrapper{ transform:scale(var(--fan-scale, 1)); }
 }
+
+.notes{
+  margin-top:30px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:18px 20px;
+}
+.notes h3{ margin:0 0 8px; font-size:15px; color:var(--maroon); }
+.notes ul{ margin:0; padding-left:18px; color:var(--muted); font-size:13.5px; line-height:1.6;}

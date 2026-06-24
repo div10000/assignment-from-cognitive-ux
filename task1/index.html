@@ -78,6 +78,14 @@
     </section>
     <!-- ===================== REPLICA SECTION ENDS ===================== -->
 
+    <section class="notes">
+      <h3>Design &amp; Implementation Notes</h3>
+      <ul>
+        <li><strong>Background Styles &amp; Inheritance</strong>: On the live webpage, the textured peach background is inherited from a parent wrapper (e.g., the global <code>&lt;body&gt;</code> or a parent container) or styled via pseudo-elements on the parent, as the <code>section.exclusive</code> element itself is transparent. For this standalone replica, the gradient has been styled directly on the section container for self-containment.</li>
+        <li><strong>Swiper.js Stacking &amp; Defaults</strong>: The original layout relies on the external Swiper.js library's default styles (such as its default blue color <code>#007aff</code> for navigation elements and specific positioning of bullet points). Since the task requirements forbid external libraries and frameworks, these transitions, 3D rotations, and pagination states are simulated using native CSS transforms and vanilla JS.</li>
+        <li><strong>Font Rendering</strong>: Differences in rendering may exist depending on local system fonts and font-smoothing, but we have aligned the typeface to the custom Mulish font family loaded from Google Fonts as observed on the original webpage.</li>
+      </ul>
+    </section>
   </main>
 
   <script src="task1.js"></script>
