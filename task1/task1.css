@@ -40,14 +40,16 @@ body{
 
 /* ===================================================================
    section.exclusive
-   Background is a PLACEHOLDER — not yet captured from the live page.
-   Swap this gradient for the real section background once you send
-   the console-snippet output (see README block below).
+   Confirmed: this element itself has background:none + transparent
+   background-color, so the peach/tan texture you see live must come
+   from a parent (body?) or a ::before/::after pseudo-element. Still a
+   PLACEHOLDER gradient below until the follow-up snippet (see README)
+   confirms which one and what the real image/color is.
    =================================================================== */
 .exclusive{
   position:relative;
-  padding:48px 0;
-  background:linear-gradient(160deg, #e7c9a6, #dab089); /* TODO: confirm via console snippet */
+  padding:40px 0; /* exact, from computed sectionPadding */
+  background:linear-gradient(160deg, #e7c9a6, #dab089); /* TODO: placeholder — real bg lives elsewhere, see README */
   overflow:hidden;
 }
 
@@ -136,39 +138,40 @@ body{
 /* Typography inside cards — PLACEHOLDER sizes, not yet captured */
 .slide p{ margin:4px 0; font-size:14px; line-height:1.4; }
 .slide h3{ margin:8px 0; font-size:22px; font-weight:700; }
-.logo-placeholder{
+.slide img{
+  max-width:80%;
+  height:auto;
   margin:8px auto 0;
-  font-size:13px;
-  font-weight:700;
+  display:block;
+}
+.slide em{
+  display:block;
+  margin-top:6px;
+  font-size:10px;
   font-style:italic;
-  color:rgba(0,0,0,0.45);
-  border:1px dashed rgba(0,0,0,0.25);
-  border-radius:6px;
-  padding:2px 8px;
-  display:inline-block;
+  opacity:0.75;
 }
 
-/* Arrows + pagination — PLACEHOLDER styling, real Swiper button/pagination
-   CSS from the theme not yet captured */
+/* Arrows — size/background/position now EXACT from console dump.
+   color #007aff is the literal captured value (Swiper's own default
+   theme color) — surprising, but trusting the data over assumption
+   until the follow-up pseudo-element check confirms/denies it. */
 .swiper-button-prev,
 .swiper-button-next{
   position:absolute;
   top:50%;
   transform:translateY(-50%);
-  width:34px;height:34px;
+  width:30px;height:30px;
   border-radius:50%;
   border:none;
-  background:rgba(255,255,255,0.7);
-  color:var(--maroon);
+  background:rgba(0,0,0,0);
+  color:#007aff;
   cursor:pointer;
   display:flex;align-items:center;justify-content:center;
   z-index:10;
-  transition:background .15s ease;
 }
-.swiper-button-prev{ left:8px; }
-.swiper-button-next{ right:8px; }
-.swiper-button-prev:hover,
-.swiper-button-next:hover{ background:rgba(255,255,255,0.95); }
+.swiper-button-prev{ left:10px; }
+.swiper-button-next{ right:10px; }
 .swiper-button-prev svg,
 .swiper-button-next svg{
   width:16px;height:16px;
@@ -178,25 +181,23 @@ body{
 
 .swiper-pagination{
   position:absolute;
-  left:0; right:0; bottom:14px;
+  left:0; right:0; bottom:8px; /* exact */
   display:flex;
   justify-content:center;
   gap:6px;
   z-index:10;
 }
 .swiper-pagination-bullet{
-  width:7px;height:7px;
+  width:10px;height:10px; /* exact */
   border-radius:50%;
-  background:rgba(151,40,29,0.35);
+  background:rgba(227,83,15,0.4); /* #e3530f dimmed — inactive state not yet confirmed, see README */
   border:none;
   padding:0;
   cursor:pointer;
 }
 .swiper-pagination-bullet.active{
-  background:var(--maroon);
-  width:18px;
-  border-radius:4px;
-  transition:width .2s ease;
+  background:rgb(227,83,15); /* exact, captured value */
+  opacity:1;
 }
 
 /* ===================================================================
