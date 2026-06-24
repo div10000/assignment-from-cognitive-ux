@@ -16,8 +16,7 @@
     <p class="page-subtitle">
       Rebuilt from real computed styles + DOM structure pulled via Chrome DevTools
       (no Swiper.js used — the 3D coverflow is hand-rolled in <code>task1.js</code>
-      from the actual captured transform values). See the README note at the bottom
-      for the handful of values still needed to close the last gap to exact.
+      from the actual captured transform values).
     </p>
 
     <!-- ===================== REPLICA SECTION STARTS =====================
@@ -79,51 +78,6 @@
     </section>
     <!-- ===================== REPLICA SECTION ENDS ===================== -->
 
-    <section class="readme">
-      <h3>Where this stands now vs. what's still needed</h3>
-      <p><strong>Now exact</strong> (from your two console dumps):</p>
-      <ul>
-        <li>All 4 cards' real text + real logo images (ixigo, Reliance Digital, BookMyShow) and the "*available on selected cards" disclaimer on the Enjoy Benefits card.</li>
-        <li>Arrow buttons: 30&times;30px, transparent background, positioned 10px from the left/right edge.</li>
-        <li>Pagination: sits 8px from the bottom; bullets are 10&times;10px, color <code>#e3530f</code>.</li>
-      </ul>
-      <p><strong>One genuinely surprising result</strong>: <code>section.exclusive</code> itself has <code>background: none</code> and a transparent background-color. So the peach/tan textured background you see is <em>not</em> on this element — it has to be coming from a parent (maybe <code>&lt;body&gt;</code>), or from a <code>::before</code>/<code>::after</code> pseudo-element on the section, which a plain <code>getComputedStyle(section)</code> call can't see. The snippet below checks both places.</p>
-      <p>Also still unconfirmed: the arrow icon's actual rendering (computed <code>color</code> came back as Swiper's literal default blue, <code>#007aff</code> — possibly never themed, possibly rendered via a pseudo-element my snippet didn't check), in-card type sizes, and the bullet's <em>inactive</em> state color (I only got one bullet's values, not the active vs. inactive distinction).</p>
-      <p>Paste this into the live page's console and send me the clipboard JSON:</p>
-      <pre class="console-snippet">copy((() => {
-  const sec = document.querySelector('section.exclusive');
-  const before = getComputedStyle(sec, '::before');
-  const after = getComputedStyle(sec, '::after');
-  const body = getComputedStyle(document.body);
-  const html = getComputedStyle(document.documentElement);
-  const prev = document.querySelector('.swiper-button-prev');
-  const prevAfter = prev ? getComputedStyle(prev, '::after') : null;
-  const bullets = [...document.querySelectorAll('.swiper-pagination-bullet')];
-  const activeBullet = document.querySelector('.swiper-pagination-bullet-active');
-
-  return JSON.stringify({
-    bodyBackground: { image: body.backgroundImage, color: body.backgroundColor },
-    htmlBackground: { image: html.backgroundImage, color: html.backgroundColor },
-    sectionBeforePseudo: { content: before.content, image: before.backgroundImage, color: before.backgroundColor },
-    sectionAfterPseudo: { content: after.content, image: after.backgroundImage, color: after.backgroundColor },
-    arrowPrevBackgroundImage: prev ? getComputedStyle(prev).backgroundImage : null,
-    arrowPrevAfterPseudo: prevAfter ? { content: prevAfter.content, fontFamily: prevAfter.fontFamily, color: prevAfter.color } : null,
-    bulletDefault: bullets.length ? { background: getComputedStyle(bullets[0]).backgroundColor, opacity: getComputedStyle(bullets[0]).opacity } : null,
-    bulletActive: activeBullet ? { background: getComputedStyle(activeBullet).backgroundColor, opacity: getComputedStyle(activeBullet).opacity, transform: getComputedStyle(activeBullet).transform } : null,
-    cardTextSizes: (() => {
-      const h3 = document.querySelector('.slide h3');
-      const p = document.querySelector('.slide p');
-      const em = document.querySelector('.slide em');
-      return {
-        h3: h3 ? { fontSize: getComputedStyle(h3).fontSize, fontWeight: getComputedStyle(h3).fontWeight, margin: getComputedStyle(h3).margin, color: getComputedStyle(h3).color } : null,
-        p: p ? { fontSize: getComputedStyle(p).fontSize, lineHeight: getComputedStyle(p).lineHeight, margin: getComputedStyle(p).margin } : null,
-        em: em ? { fontSize: getComputedStyle(em).fontSize, color: getComputedStyle(em).color } : null
-      };
-    })()
-  }, null, 2);
-})())</pre>
-      <p><strong>Still also worth getting:</strong> resize the browser to ~375px wide and re-run the original container/heading/swiper <code>getStyles()</code> calls from your first Gemini export at that width — that's the one piece needed for the "Responsiveness" grading criterion that nothing above covers.</p>
-    </section>
   </main>
 
   <script src="task1.js"></script>

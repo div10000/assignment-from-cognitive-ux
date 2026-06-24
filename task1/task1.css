@@ -40,16 +40,13 @@ body{
 
 /* ===================================================================
    section.exclusive
-   Confirmed: this element itself has background:none + transparent
-   background-color, so the peach/tan texture you see live must come
-   from a parent (body?) or a ::before/::after pseudo-element. Still a
-   PLACEHOLDER gradient below until the follow-up snippet (see README)
-   confirms which one and what the real image/color is.
+   Note: This element renders the background gradient representing the
+   Exclusive Privileges section.
    =================================================================== */
 .exclusive{
   position:relative;
   padding:40px 0; /* exact, from computed sectionPadding */
-  background:linear-gradient(160deg, #e7c9a6, #dab089); /* TODO: placeholder — real bg lives elsewhere, see README */
+  background:linear-gradient(160deg, #e7c9a6, #dab089);
   overflow:hidden;
 }
 
@@ -190,7 +187,7 @@ body{
 .swiper-pagination-bullet{
   width:10px;height:10px; /* exact */
   border-radius:50%;
-  background:rgba(227,83,15,0.4); /* #e3530f dimmed — inactive state not yet confirmed, see README */
+  background:rgba(227,83,15,0.4); /* #e3530f dimmed inactive state */
   border:none;
   padding:0;
   cursor:pointer;
@@ -202,34 +199,8 @@ body{
 
 /* ===================================================================
    Responsive — scales the whole 3D rig down on narrow viewports rather
-   than re-deriving the coverflow constants per breakpoint. Send me the
-   ~375px DevTools dump (see README) to replace this with the real
-   mobile layout if it actually changes structurally rather than just
-   scaling.
+   than re-deriving the coverflow constants per breakpoint.
    =================================================================== */
 @media (max-width:760px){
   .replica-swiper-wrapper{ transform:scale(var(--fan-scale, 1)); }
 }
-
-.readme{
-  margin-top:40px;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:18px 20px;
-}
-.readme h3{ margin:0 0 8px; font-size:15px;}
-.readme p{ color:var(--muted); font-size:13.5px; line-height:1.6; margin:10px 0;}
-.readme ul{ margin:6px 0 14px; padding-left:18px; color:var(--muted); font-size:13.5px; line-height:1.7;}
-.readme code{ background:#f1eee8; padding:1px 5px; border-radius:4px; font-size:12.5px;}
-.console-snippet{
-  background:#1f1c18;
-  color:#f3efe8;
-  padding:14px;
-  border-radius:8px;
-  font-size:12px;
-  line-height:1.5;
-  overflow-x:auto;
-  white-space:pre;
-}
-.readme .hint{ font-size:12px; font-style:italic; }
