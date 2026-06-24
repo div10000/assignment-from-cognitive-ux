@@ -35,7 +35,6 @@
       <ul>
         <li>Each slide is a thumbnail until clicked ("lite embed") — this avoids loading 3 YouTube iframes (and their scripts) up front, which is the biggest real-world performance cost of video carousels.</li>
         <li>Only one <code>YT.Player</code> instance exists at a time. Switching slides destroys the old player and mounts a new one, so memory/network stay bounded regardless of carousel size.</li>
-        <li>Chapter timestamps are placeholders — <strong>see the README note below</strong> on why, and how to swap in real ones in under a minute.</li>
       </ul>
     </section>
 

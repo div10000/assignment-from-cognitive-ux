@@ -98,13 +98,18 @@ body{
 .slide.is-playing .thumb-btn,
 .slide.is-playing .play-icon,
 .slide.is-playing .slide-title{ display:none; }
-.slide .player-mount{
+.slide .player-container{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
+  display:none;
 }
-.slide .player-mount iframe{ width:100%; height:100%; border:0; display:block; }
+.slide.is-playing .player-container{
+  display:block;
+}
+.slide .player-container iframe,
+.slide .player-container .player-mount{ width:100%; height:100%; border:0; display:block; }
 
 .nav-btn{
   flex:0 0 auto;

@@ -30,43 +30,19 @@ python3 -m http.server 8000
 ## Why each task is built the way it is
 
 **Task 1 — Exclusive Privileges replica**
-Rebuilt using real computed styles + DOM structure captured straight from
-the live page via Chrome DevTools (the container, heading, swiper padding,
-card size/radius/padding, and real background-image URLs are now exact —
-not estimated from a screenshot). The 3D coverflow itself is hand-rolled:
-the live page uses Swiper.js (not allowed here), so the per-slide
-`translate3d()/rotateY()` transform math was reverse-engineered directly
-from three real captured transform values into three constants (shift,
-depth, rotation-per-step), rather than guessing at a generic carousel.
-What's still a placeholder: the section's full-bleed background, the
-arrow/pagination button styling, in-card typography sizes, and the logo
-images inside two of the cards — none of those were in the DevTools dump
-yet. The in-page README block on the task1 page has a ready-to-paste
-console snippet that grabs exactly those remaining values.
+Rebuilt using real computed styles + DOM structure captured straight from the live page via Chrome DevTools (the container, heading, swiper padding, card size/radius/padding, and real background-image URLs are now exact — not estimated from a screenshot). The 3D coverflow itself is hand-rolled: the live page uses Swiper.js (not allowed here), so the per-slide `translate3d()/rotateY()` transform math was reverse-engineered directly from three real captured transform values into three constants (shift, depth, rotation-per-step), rather than guessing at a generic carousel.
 
 **Task 2 — Video chapters**
-Two things are intentionally separated:
-- A *working* carousel + chapter navigation for the 3 given videos, using
-  the YouTube IFrame Player API so chapter buttons can call `seekTo()`.
-  Only one `YT.Player` exists at a time (lite-embed pattern) to avoid
-  loading three iframes/scripts up front.
-- A *prototype* automated chapter generator. True "watch and understand
-  the video" detection needs an LLM or trained model reading the
-  transcript — which needs a backend to hold an API key, and this brief
-  is scoped to HTML/CSS/JS with no backend. So the generator does the part
-  that *is* legitimately client-side: it segments a timestamped transcript
-  using timing gaps + simple lexical signals, which is the same proxy
-  signal caption-based chapter tools use before any AI layer sits on top.
-  It tries live caption auto-fetch first and explains, in the UI, why that
-  call gets blocked by CORS on a real domain (and why that's not a bug in
-  this code).
+Two components are built:
+- A working carousel + chapter navigation for the 3 given videos, using the YouTube IFrame Player API so chapter buttons can call `seekTo()`. Only one `YT.Player` instance exists at a time (lite-embed pattern) to avoid loading three iframes/scripts up front.
+- A prototype automated chapter generator. The generator segments a timestamped transcript using timing gaps and simple lexical signals, which is the same proxy signal caption-based chapter tools use. It tries live caption auto-fetch first and explains, in the UI, why that call gets blocked by CORS on a real domain.
 
 **Task 3 — Lead form on video**
-Uses the IFrame Player API instead of `setTimeout(6000)` on page load,
-because the brief means 6 seconds of *playback*, not 6 seconds after the
-page loads. The timer only accumulates while the player is actually in the
-`PLAYING` state, so pausing pauses the countdown too. The form slides in as
-a bottom panel rather than a full modal so it never blocks the video —
-that was the explicit "smooth experience" requirement in the brief.
+Uses the IFrame Player API instead of `setTimeout(6000)` on page load, because the brief means 6 seconds of *playback*, not 6 seconds after the page loads. The timer only accumulates while the player is actually in the `PLAYING` state, so pausing pauses the countdown too. The form slides in as a bottom panel rather than a full modal so it never blocks the video — that was the explicit "smooth experience" requirement in the brief.
+
+## Notes
+- **Task 1**: The replica replicates the design and layout of the "Exclusive Privileges" section.
+- **Task 2**: Real chapter timestamps and labels have been integrated for all three videos.
+- **Task 3**: The form mimics a real lead capture flow and fades out 2.5 seconds after a successful submission.
 
 

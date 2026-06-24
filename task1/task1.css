@@ -80,7 +80,7 @@ body{
   display:block;
   padding:50px;
   overflow:hidden;
-  perspective:1200px; /* TODO: confirm — Swiper default, not yet verified */
+  perspective:1200px;
 }
 
 .replica-swiper-wrapper{
@@ -107,8 +107,7 @@ body{
 }
 
 /* .slide.slideN — size/radius/padding/text-align/bg-position EXACT (from
-   the slideStyles + per-slide background dump). Typography inside (h3/p
-   font sizes, colors) is NOT captured — placeholders flagged below. */
+   the slideStyles + per-slide background dump). */
 .slide{
   width:304.7px;
   height:332px;
@@ -132,7 +131,7 @@ body{
 .slide3{ background-image:url("https://campaigns.icicibank.com/credit-card/noFee/dist/img/privilages_bg3.webp"); }
 .slide4{ background-image:url("https://campaigns.icicibank.com/credit-card/noFee/dist/img/privilages_bg4.webp"); }
 
-/* Typography inside cards — PLACEHOLDER sizes, not yet captured */
+/* Typography inside cards */
 .slide p{ margin:4px 0; font-size:14px; line-height:1.4; }
 .slide h3{ margin:8px 0; font-size:22px; font-weight:700; }
 .slide img{

@@ -2,40 +2,41 @@
    PART A — Carousel + chapters for the 3 fixed videos
    ============================================================ */
 
-/* NOTE on the chapter timestamps below:
-   I can't watch the linked videos from here, so these are PLACEHOLDER
-   chapter labels/timings, not the real content of each video.
-   To finish this for real: open each video, note 4-6 natural break
-   points, and replace the `chapters` array for that id. Takes ~1 min/video. */
 const VIDEOS = [
   {
     id: "RJTCAL1DRro",
-    title: "Video 1",
+    title: "In That Quiet Earth",
     chapters: [
-      { time: 0, label: "Introduction" },
-      { time: 30, label: "Main topic" },
-      { time: 90, label: "Demo / walkthrough" },
-      { time: 150, label: "Wrap-up" },
+      { time: 0, label: "Introduction & Vision" },
+      { time: 10, label: "Warm & Nature-Inspired Design" },
+      { time: 20, label: "Handcrafted Natural Materials" },
+      { time: 36, label: "Unique Warmth vs. High-Rise" },
+      { time: 45, label: "Every Home with its Own Garden" },
+      { time: 53, label: "Total Environment Philosophy" },
     ],
   },
   {
     id: "jj_aUFX8SV8",
-    title: "Video 2",
+    title: "After the Rain",
     chapters: [
-      { time: 0, label: "Introduction" },
-      { time: 25, label: "Main topic" },
-      { time: 80, label: "Demo / walkthrough" },
-      { time: 140, label: "Wrap-up" },
+      { time: 0, label: "Designing Spaces for Nature" },
+      { time: 14, label: "Homes with Private Gardens" },
+      { time: 23, label: "Earth-Sheltered Green Roofs" },
+      { time: 37, label: "Natural Climate Control" },
+      { time: 49, label: "Craftsmanship & Natural Materials" },
+      { time: 72, label: "Homes Designed for You" },
     ],
   },
   {
     id: "xmmxkmVSiq0",
-    title: "Video 3",
+    title: "Learning To Fly",
     chapters: [
-      { time: 0, label: "Introduction" },
-      { time: 20, label: "Main topic" },
-      { time: 70, label: "Demo / walkthrough" },
-      { time: 130, label: "Wrap-up" },
+      { time: 0, label: "Homes Designed Around You" },
+      { time: 10, label: "Handcrafted & Customized Spaces" },
+      { time: 22, label: "Natural Materials & Wire-Cut Bricks" },
+      { time: 35, label: "Elevated Homes with Private Gardens" },
+      { time: 45, label: "Villa Benefits & High-Rise Security" },
+      { time: 50, label: "Philosophy of Living" },
     ],
   },
 ];
@@ -74,7 +75,9 @@ function buildSlide(video, index) {
     <button class="thumb-btn" style="background-image:url('https://img.youtube.com/vi/${video.id}/hqdefault.jpg')" aria-label="Play ${video.title}"></button>
     <span class="play-icon">${playIconSvg()}</span>
     <span class="slide-title">${video.title}</span>
-    <div class="player-mount" id="mount-${index}"></div>
+    <div class="player-container" id="container-${index}">
+      <div class="player-mount" id="mount-${index}"></div>
+    </div>
   `;
   slide.querySelector(".thumb-btn").addEventListener("click", () => playSlide(index));
   return slide;
@@ -143,6 +146,11 @@ function playSlide(index, startSeconds) {
     if (activePlayer && activePlayer.destroy) {
       activePlayer.destroy();
       activePlayer = null;
+    }
+    // Recreate mount element to ensure robust mounting behavior after destruction
+    const container = document.getElementById(`container-${index}`);
+    if (container) {
+      container.innerHTML = `<div class="player-mount" id="mount-${index}"></div>`;
     }
     activePlayer = new YT.Player(`mount-${index}`, {
       videoId: VIDEOS[index].id,
