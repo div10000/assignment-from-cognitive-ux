@@ -69,11 +69,4 @@ page loads. The timer only accumulates while the player is actually in the
 a bottom panel rather than a full modal so it never blocks the video —
 that was the explicit "smooth experience" requirement in the brief.
 
-## What's left to do (see in-page notes in each task)
-- **Task 1**: swap in real colors/fonts/spacing/images once you've pulled
-  them from DevTools on the live page (checklist is at the bottom of the
-  task1 page itself).
-- **Task 2**: replace the placeholder chapter timestamps/labels with real
-  ones after watching each of the 3 videos.
-- **Task 3**: works as-is; swap the form's fake-submit for a real endpoint
-  if you want it to actually collect leads.
+
